@@ -77,6 +77,20 @@ public class Notebook implements ShellDependent {
         return result;
     }
 
+    @Command
+    public List<Record> listExpired(){
+        List<Record> result = new ArrayList<>();
+        for (Record r: records) {
+            if (r instanceof Expirable) {
+                Expirable e = (Expirable) r;
+                if (e.isExpired()) {
+                    result.add(r);
+                }
+            }
+        }
+        return result;
+    }
+
     @Override
     public void cliSetShell(Shell theShell) {
         this.parentShell = theShell;

@@ -5,7 +5,7 @@ import asg.cliche.Command;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Reminder extends Note {
+public class Reminder extends Note implements Expirable{
     private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
     private LocalDateTime time;
 
@@ -29,5 +29,15 @@ public class Reminder extends Note {
                 ", note='" + getNote() + '\'' +
                 ", time='" + time.format(FORMAT) + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean isExpired() {
+        return time.isBefore(LocalDateTime.now());
+    }
+
+    @Override
+    public void dismiss() {
+
     }
 }
