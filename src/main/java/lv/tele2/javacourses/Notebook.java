@@ -8,6 +8,7 @@ import asg.cliche.ShellFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Notebook implements ShellDependent {
     private final ArrayList<Record> records = new ArrayList<>();
@@ -62,6 +63,18 @@ public class Notebook implements ShellDependent {
             }
         }
         return null;
+    }
+
+    @Command
+    public List<Record> find(String str) {
+        ArrayList<Record> result = new ArrayList<>();
+        for (Record r: records) {
+            if (r.contains(str)) {
+                result.add(r);
+            }
+        }
+        System.out.println("Found " + result.size() + " matching results!");
+        return result;
     }
 
     @Override
